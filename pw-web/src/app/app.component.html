@@ -1,0 +1,43 @@
+<!-- nav -->
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" *ngIf="currentUser">
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="mainNavbar">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/">Home</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/shop-list">Shop</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/product-list">Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/client-list">Clients</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="/soldList-list">Sold Products</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-item nav-link" (click)="logout()">Logout</a>
+      </li>
+    </ul>
+    <form class ="form-inline">
+      <input class ="form-control" type="text" placeholder="Search" aria-label="Search">
+    </form>
+    <span class="navbar-text">
+      Bem-vindo {{currentUser.firstName}}, {{currentUser.lastName}}
+    </span>
+  </div>
+</nav>
+
+<!--The content below is only a placeholder and can be replaced.-->
+
+<!-- main app container -->
+<div class="jumbotron">
+  <div class="container-fluid">
+    <router-outlet></router-outlet>
+  </div>
+</div>

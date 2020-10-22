@@ -1,0 +1,32 @@
+<div>
+  <h2 id="product-page-heading">
+    <span>Sold Products Log</span>
+  </h2>
+  <br/>
+  <div class="table-responsive" *ngIf="soldList">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th><span>ID</span></th>
+        <th><span>Brand</span></th>
+        <th><span>Product Name</span></th>
+        <th><span>Product Code</span></th>
+        <th><span>User Name</span></th>
+        <th><span>Purchase Date</span></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let soldList of soldLists | orderBy : ['id']; trackBy: trackId">
+        <td>{{soldList.id}}</td>
+        <td>{{soldList.product.brand}}</td>
+        <td>{{soldList.product.productName}}</td>
+        <td>{{soldList.product.productCode}}</td>
+        <td>{{soldList.client.userName}}</td>
+        <td>{{soldList.dateOfPurchase | date:'medium'}}</td>
+        <td class="text-right">
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

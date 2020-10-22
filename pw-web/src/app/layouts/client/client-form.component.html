@@ -1,0 +1,145 @@
+<h2>Client</h2>
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-control-label" for="clientFirstNameInput">Client Name</label>
+            <input type="text" class="form-control" name="clientFirstNameInput" id="clientFirstNameInput" [(ngModel)]="client.firstName" placeholder="Client First Name" required/>
+            <div [hidden]="!(editForm.controls.clientFirstNameInput?.dirty && editForm.controls.clientFirstNameInput?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.clientFirstNameInput?.errors?.required">
+                  This field is required.
+              </small>
+            </div>
+        </div>
+    </div>
+     <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-control-label" for="clientLastNameInput">Client Last Name</label>
+            <input type="text" class="form-control" name="clientLastNameInput" id="clientLastNameInput" [(ngModel)]="client.lastName" placeholder="Client Last Name" required/>
+            <div [hidden]="!(editForm.controls.clientLastNameInput?.dirty && editForm.controls.clientLastNameInput?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.clientLastNameInput?.errors?.required">
+                  This field is required.
+              </small>
+            </div>
+        </div>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-control-label" for="clientDateOfBirthInput">Date of Birth</label>
+            <input type="date" class="form-control" name="clientDateOfBirthInput" id="clientDateOfBirthInput" [(ngModel)]="client.dateOfBirth" placeholder="yyyy-mm-dd" required/>
+            <div [hidden]="!(editForm.controls.clientDateOfBirthInput?.dirty && editForm.controls.clientDateOfBirthInput?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.clientDateOfBirthInput?.errors?.required">
+                  This field is required.
+              </small>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="form-group">
+            <label class="form-control-label" for="clientNIFInput">NIF</label>
+            <input type="text" class="form-control" name="clientNIFInput" id="clientNIFInput" [(ngModel)]="client.nif" placeholder="NIF" required/>
+            <div [hidden]="!(editForm.controls.clientNIFInput?.dirty && editForm.controls.clientNIFInput?.invalid)">
+              <small class="form-text text-danger" [hidden]="!editForm.controls.clientNIFInput?.errors?.required">
+                  This field is required.
+              </small>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <hr>
+  <h4 id="client-address-page-heading">
+    <span>Client Address</span>
+    <button id="new-client-btn" class="btn btn-primary float-right" (click)="addClientAddress()">
+      <fa-icon [icon]="'plus'"></fa-icon>
+      <span>
+        New Client Address
+      </span>
+    </button>
+  </h4>
+  <br/>
+  <div class="table-responsive" *ngIf="client.addresses">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+      <th><span>ID</span></th>
+      <th><span>Address</span></th>
+      <th><span>Postal Code</span></th>
+      <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let address of client.addresses; let i = index; trackBy: trackId">
+          <td>{{address.id}}</td>
+          <td>
+            <input type="text" class="form-control" name="addressAddress-{{i}}" id="addressAddress-{{i}}" [(ngModel)]="address.address" placeholder="Address" required/>
+          </td>
+          <td>
+            <input type="text" class="form-control" name="addressPostalCode-{{i}}" id="addressPostalCode-{{i}}" [(ngModel)]="address.postalCode" placeholder="Postal Code" required/>
+          </td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteAddress(address)">
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span class="d-none d-md-inline"> Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <hr>
+  <h4 id="client-contact-page-heading">
+    <span>Client Contact</span>
+    <button id="new-client-btn" class="btn btn-primary float-right" (click)="addClientContact()">
+      <fa-icon [icon]="'plus'"></fa-icon>
+      <span>
+        New Client Contact
+      </span>
+    </button>
+  </h4>
+  <br/>
+  <div class="table-responsive" *ngIf="client.contacts">
+    <table class="table table-striped">
+      <thead>
+      <tr>
+      <th><span>ID</span></th>
+      <th><span>Contact Type</span></th>
+      <th><span>Contact</span></th>
+      <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let contact of client.contacts; let i = index; trackBy: trackId">
+          <td>{{contact.id}}</td>
+          <td>
+            <select class="form-control" name="contactContactType-{{i}}" [(ngModel)]="contact.contactType" id="contactContactType-{{i}}" required>
+              <option value="PHONE">Phone Number</option>
+              <option value="EMAIL">Email</option>
+              <option value="MOBILE">Mobile</option>
+            </select>
+          </td>
+          <td>
+            <input type="text" class="form-control" name="contactContact-{{i}}" id="contactContact-{{i}}" [(ngModel)]="contact.contact" placeholder="Contact" required/>
+          </td>
+          <td class="text-right">
+            <div class="btn-group flex-btn-group-container">
+              <button type="button" class="btn btn-danger btn-sm" (click)="deleteContact(contact)">
+                <fa-icon [icon]="'times'"></fa-icon>
+                <span class="d-none d-md-inline"> Delete</span>
+              </button>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <button type="button" class="btn btn-primary" [disabled]="editForm.form.invalid" (click)="saveClient()">
+    <fa-icon [icon]="'save'"></fa-icon>
+    <span>Save</span>
+  </button>
+</form>

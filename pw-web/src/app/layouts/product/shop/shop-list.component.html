@@ -1,0 +1,29 @@
+<div>
+  <h2 id="product-page-heading">
+    <span>Shop</span>
+  </h2>
+  <br/>
+  <div class="card" *ngIf="products">
+    <ng-container *ngFor="let product of products trackBy: trackId">
+      <div class="container">
+        <div class="card mb-4 shadow-sm">
+          <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><rect width="100%" height="100%" fill="#55595c"></rect><text x="50%" y="50%" fill="#eceeef" dy=".3em">{{product.productName}}</text></svg>
+          <div class="card-body">
+            <p class="card-text">{{product.description}}</p>
+            <p class="card-text"><b>{{product.preco}}€</b></p>
+            <div class="d-flex justify-content-between align-items-center">
+              <div class="btn-group">
+                <button type="submit"
+                        [routerLink]="['/product', product.id, 'buy']"
+                         class="btn btn-success">
+                  <fa-icon [icon]=""></fa-icon>
+                  <span class="d-none d-md-inline">Buy</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>

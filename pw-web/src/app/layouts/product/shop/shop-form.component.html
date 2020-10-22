@@ -1,0 +1,20 @@
+<h2>Product</h2>
+<form name="editForm" role="form" novalidate #editForm="ngForm">
+  <div class="row">
+    <div class="col-md-6">
+      <div class="form-group">
+        <label class="form-control-label" for="productStockInput">Product Stock</label>
+        <input type="text" class="form-control" name="productStockInput" id="productStockInput" [(ngModel)]="product.stock" placeholder="Product Stock" required/>
+        <div [hidden]="!(editForm.controls.productStockInput?.dirty && editForm.controls.productStockInput?.invalid)">
+          <small class="form-text text-danger" [hidden]="!editForm.controls.productStockInput?.errors?.required">
+            This field is required.
+          </small>
+        </div>
+      </div>
+    </div>
+  </div>
+  <button type="button" class="btn btn-primary" [disabled]="editForm.form.invalid" (click)="buyProduct()">
+    <fa-icon [icon]="'save'"></fa-icon>
+    <span> Save</span>
+  </button>
+</form>
